@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Logo from "./Logo";
 import {Menu, X} from "lucide-react";
 import {useState} from "react";
 
@@ -20,17 +21,7 @@ export default function Navbar() {
         <div className="flex h-20 items-center justify-between px-6">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-1">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0B1F4D] text-white font-bold">
-              CA
-            </div>
-            <div className="hidden sm:block">
-              <p className="text-sm font-semibold text-slate-900">
-                Court of Appeal Calabar Staff
-              </p>
-              <p className="text-xs text-slate-500">
-                Multi-Purpose Cooperative Society
-              </p>
-            </div>
+            <Logo />
           </Link>
 
           <div className="hidden md:flex items-center gap-9">

@@ -5,7 +5,11 @@ import Footer from "@/components/layout/Footer";
 export default function Home() {
   return (
     <>
-      <Hero />
+      <Navbar />
+      <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10">
+        <Hero />
+      </div>
+      <Footer />
     </>
   );
 }

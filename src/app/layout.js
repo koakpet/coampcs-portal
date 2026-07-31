@@ -1,6 +1,5 @@
 import {Inter} from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 const inter = Inter({
@@ -35,11 +34,7 @@ export default function RootLayout({children}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} antialiased`}>
-        <Navbar />
-        <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10">
-          {children}
-        </div>
-        <Footer />
+        <div>{children}</div>
       </body>
     </html>
   );
