@@ -44,10 +44,10 @@ const actions = [
 
 export default function QuickActions() {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+    <section className="hidden md:block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
       {/* Header */}
 
-      <div className="mb-8">
+      <div className="mb-8 bg-white">
         <h2 className="text-2xl font-bold text-slate-900">Quick Actions</h2>
 
         <p className="mt-2 text-slate-500">Frequently used member services.</p>
@@ -55,7 +55,7 @@ export default function QuickActions() {
 
       {/* Action Cards */}
 
-      <div className="space-y-4">
+      <div className="flex flex-col gap-3 pt-3">
         {actions.map((action) => {
           const Icon = action.icon;
 

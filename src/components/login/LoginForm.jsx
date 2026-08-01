@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {useState} from "react";
+import Logo from "../layout/Logo";
 import {Eye, EyeOff, Lock, ShieldCheck, User} from "lucide-react";
 
 export default function LoginForm() {
@@ -10,90 +11,75 @@ export default function LoginForm() {
   return (
     <section className="mx-auto max-w-md px-6">
       <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl">
-        {/* Logo / Title */}
-
-        <div className="mb-10 text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#0B1F4D] text-white text-2xl font-bold">
-            CA
-          </div>
-
-          <h1 className="mt-6 text-3xl font-bold text-slate-900">
-            Member Login
-          </h1>
-
-          <p className="mt-3 text-slate-600">
-            Access your savings, loans and cooperative services securely.
-          </p>
-        </div>
+        <h1 className="py-9 text-3xl font-bold text-slate-900 text-center">
+          Member Login
+        </h1>
 
         {/* Form */}
-
-        <form className="space-y-6">
-          {/* Membership Number */}
-
-          <div>
-            <label className="mb-2 block text-sm font-medium text-slate-700">
+        <form className="flex flex-col gap-12">
+          <div className="flex flex-col gap-3">
+            {/* Membership Number */}
+            <div>
+              {/* <label className="mb-2 block text-sm font-medium text-slate-700">
               Membership Number
-            </label>
+            </label> */}
 
-            <div className="flex items-center rounded-xl border border-slate-300 px-4 focus-within:border-[#0B1F4D]">
-              <User size={18} className="text-slate-400" />
+              <div className="flex items-center rounded-xl border border-slate-300 px-4 focus-within:border-[#0B1F4D]">
+                <User size={18} className="text-slate-400" />
 
-              <input
-                type="text"
-                placeholder="Enter your membership number"
-                className="w-full bg-transparent px-3 py-4 outline-none"
-              />
+                <input
+                  type="text"
+                  placeholder="Email Address"
+                  className="w-full bg-transparent px-1.5 py-3 outline-none"
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Password */}
-
-          <div>
-            <label className="mb-2 block text-sm font-medium text-slate-700">
+            {/* Password */}
+            <div>
+              {/* <label className="mb-2 block text-sm font-medium text-slate-700">
               Password
-            </label>
+            </label> */}
 
-            <div className="flex items-center rounded-xl border border-slate-300 px-4 focus-within:border-[#0B1F4D]">
-              <Lock size={18} className="text-slate-400" />
+              <div className="flex items-center rounded-xl border border-slate-300 px-4 focus-within:border-[#0B1F4D]">
+                <Lock size={18} className="text-slate-400" />
 
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
-                className="w-full bg-transparent px-3 py-4 outline-none"
-              />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  className="w-full bg-transparent px-1.5 py-3 outline-none"
+                />
 
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? (
-                  <EyeOff size={18} className="text-slate-500" />
-                ) : (
-                  <Eye size={18} className="text-slate-500" />
-                )}
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <EyeOff size={18} className="text-slate-500" />
+                  ) : (
+                    <Eye size={18} className="text-slate-500" />
+                  )}
+                </button>
+              </div>
             </div>
-          </div>
 
-          {/* Remember / Forgot */}
+            {/* Remember / Forgot */}
+            <div className="flex items-center justify-between text-sm">
+              <label className="flex items-center gap-2 text-slate-600">
+                <input type="checkbox" className="rounded" />
+                Remember me
+              </label>
 
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center gap-2 text-slate-600">
-              <input type="checkbox" className="rounded" />
-              Remember me
-            </label>
-
-            <Link
-              href="/forgot-password"
-              className="font-medium text-[#0B1F4D] hover:underline"
-            >
-              Forgot Password?
-            </Link>
+              <Link
+                href="/forgot-password"
+                className="font-medium text-[#0B1F4D] hover:underline"
+              >
+                Forgot Password?
+              </Link>
+            </div>
           </div>
 
           {/* Login Button */}
-
           <button
             type="submit"
             className="w-full rounded-2xl bg-[#0B1F4D] py-4 text-lg font-semibold text-white transition hover:opacity-90"

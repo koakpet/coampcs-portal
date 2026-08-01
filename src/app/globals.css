@@ -55,9 +55,9 @@
   box-sizing: border-box;
 }
 
-* {
+/* * {
   margin: 0;
-}
+} */
 
 html {
   scroll-behavior: smooth;
@@ -97,7 +97,6 @@ img {
 button {
   cursor: pointer;
   border: none;
-  background: transparent;
   font: inherit;
 }
 

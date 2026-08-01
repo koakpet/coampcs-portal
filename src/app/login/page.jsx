@@ -10,7 +10,7 @@ export default function LoginPage() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-slate-50 pt-36 pb-24">
+      <main className="h-dvh pt-18 w-full flex justify-center items-center">
         <LoginForm />
       </main>
     </>
