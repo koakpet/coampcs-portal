@@ -13,16 +13,16 @@ export default function Hero() {
           </div>
 
           {/* Heading */}
-          <h1 className="py-3 text-12xl font-extrabold leading-tight tracking-tight text-slate-900 md:text-6xl">
-            Together We <br />
+          <h1 className="py-3 text-5xl font-extrabold leading-tight tracking-tight text-slate-900 md:text-6xl">
+            Together We <br className="hidden md:block " />
             <span className="text-green-500">Save</span>.
             <br />
-            Together We <br />
+            Together We <br className="hidden md:block " />
             <span className="text-blue-500">Grow</span>.
           </h1>
 
           {/* Misson */}
-          <p className="pb-8 max-w-xl text-lg leading-8 text-slate-600">
+          <p className="pb-8 max-w-xl md:text-lg md:leading-8 text-slate-600">
             A secure digital platform that gives members access to their
             savings, loans, repayments and cooperative services from anywhere.
           </p>

@@ -12,6 +12,7 @@ const executives = [
     phone: "+234 806 592 6052",
     email: "",
     image: "/user.jpg",
+    alt: "nath_essien",
   },
   {
     id: 1,
@@ -22,6 +23,7 @@ const executives = [
     phone: "+234 703 289 1980",
     email: "",
     image: "/user.jpg",
+    alt: "chris_udom",
   },
   {
     id: 2,
@@ -32,6 +34,7 @@ const executives = [
     phone: "+234 803 697 0656",
     email: "koakpet@yahoo.co.uk",
     image: "/kohly_akpet.jpg",
+    alt: "kohly_akpet",
   },
   {
     id: 3,
@@ -42,6 +45,7 @@ const executives = [
     phone: "+234 906 755 2867",
     email: "",
     image: "/user.jpg",
+    alt: "timothy_idu",
   },
   {
     id: 4,
@@ -52,6 +56,7 @@ const executives = [
     phone: "",
     email: "",
     image: "/user.jpg",
+    alt: "bassey_ikpeme",
   },
   {
     id: 5,
@@ -62,6 +67,7 @@ const executives = [
     phone: "+234 805 578 3491",
     email: "",
     image: "/user.jpg",
+    alt: "eval_alobo",
   },
   {
     id: 6,
@@ -72,6 +78,7 @@ const executives = [
     phone: "+234 806 748 6879",
     email: "ikumajoncoa@gmail.com",
     image: "/user.jpg",
+    alt: "ikuma",
   },
 ];
 
@@ -102,16 +109,16 @@ export default function Contact() {
           <div className="flex gap-6">
             {executives.map((exco) => (
               <div
-                key="exco.id"
-                className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                key={exco.position}
+                className="w-auto rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 {/* Avatar */}
 
                 <div className="flex items-center gap-3">
                   <div className="h-18 w-18 rounded-2xl overflow-hidden">
                     <Image
-                      src={exco.src}
-                      alt="akpet_picture"
+                      src={exco.image}
+                      alt={exco.alt}
                       height="120"
                       width="120"
                       className="object-fill"
@@ -121,14 +128,14 @@ export default function Contact() {
                   <div>
                     {/* Name */}
 
-                    <h3 className="text-2xl font-bold text-slate-700">
-                      Kohly Akpet
+                    <h3 className="text-sm font-bold text-slate-700">
+                      {exco.name}
                     </h3>
 
                     {/* Position */}
 
-                    <p className="text-sm  tracking-wider font-semibold text-slate-900">
-                      Secretary
+                    <p className="text-xs  tracking-wider font-semibold text-slate-900">
+                      {exco.position}
                     </p>
                   </div>
                 </div>
@@ -138,10 +145,10 @@ export default function Contact() {
                   <div className="flex items-center gap-3">
                     <Phone size={18} className="text-emerald-600" />
                     <a
-                      href="tel:+2348036970656"
+                      href={`tel:${exco.phone}`}
                       className="text-blue-700 hover:text-blue-400 text-sm"
                     >
-                      +234 803 697 0656
+                      {exco.phone}
                     </a>
                   </div>
                   {/* Email */}
@@ -149,10 +156,10 @@ export default function Contact() {
                     <Mail size={18} className="text-blue-600" />
 
                     <a
-                      href="malto:koakpet@yahoo.co.uk"
+                      href={`malto:${exco.email}`}
                       className="text-blue-700 hover:text-blue-400 text-sm"
                     >
-                      koakpet@yahoo.co.uk
+                      {exco.email}
                     </a>
                   </div>
                 </div>

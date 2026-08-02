@@ -24,7 +24,7 @@ export default function Navbar() {
             <Logo />
           </Link>
 
-          <div className="hidden md:flex items-center gap-9">
+          {/* <div className="hidden md:flex items-center gap-9">
             <div className="items-center gap-5 flex">
               {navLinks.map((link) => {
                 return (
@@ -67,7 +67,7 @@ export default function Navbar() {
                   </Link>
                 );
               })}
-            </div>
+            </div> 
 
             <Link
               href="/login"
@@ -76,7 +76,14 @@ export default function Navbar() {
               <span className="text-white text-sm font-semibold">Login</span>
             </Link>
           </div>
-        )}
+        )} */}
+          <Link
+            href="/login"
+            className="bg-[#0B1F4D] rounded-lg px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            <span className="text-white text-sm font-semibold">Login</span>
+          </Link>
+        </div>
       </nav>
     </header>
   );

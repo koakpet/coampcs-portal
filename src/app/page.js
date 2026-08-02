@@ -1,6 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/marketing/Hero";
 import Footer from "@/components/layout/Footer";
+import Signature from "@/components/layout/Signature";
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10">
         <Hero />
       </div>
-      <Footer />
+      <Signature />
     </>
   );
 }

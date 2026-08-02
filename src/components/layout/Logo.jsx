@@ -14,7 +14,7 @@ export default function Logo() {
       </div>
       <div>
         <p className="text-sm font-semibold text-slate-900">
-          Court of Appeal Calabar Staff
+          Court of Appeal Staff
         </p>
         <p className="text-xs text-slate-500">
           Multi-Purpose Cooperative Society
