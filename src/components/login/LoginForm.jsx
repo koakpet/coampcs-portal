@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import {useState} from "react";
-import Logo from "../layout/Logo";
 import {Eye, EyeOff, Lock, ShieldCheck, User} from "lucide-react";
 
 export default function LoginForm() {

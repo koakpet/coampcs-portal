@@ -1,8 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import {ArrowRight} from "lucide-react";
 import ProductShowcase from "./ProductShowcase";
+import {useState} from "react";
+import LoginForm from "../login/LoginForm";
 
 export default function Hero() {
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <div className="pt-30 pb-15 px-1 md:px-6 flex">
@@ -28,22 +34,13 @@ export default function Hero() {
           </p>
 
           {/* Redirect Buttons */}
-          <div className="flex gap-6">
-            <Link
-              href="/login"
-              className="rounded-full bg-[#0B1F4D] px-5 py-3 transition-all duration-300 hover:bg-blue-900 hover:shadow-xl"
-            >
-              <span className="text-white inline-flex items-center gap-3">
-                Member Login <ArrowRight size={18} className="text-slate-300" />
-              </span>
-            </Link>
-            <Link
-              href="/about"
-              className="rounded-full border border-slate-300 hover:border-[#0B1F4D] px-5 py-3"
-            >
-              Learn More
-            </Link>
-          </div>
+
+          <Link
+            href="/about"
+            className="rounded-full border border-slate-300 hover:border-[#0B1F4D] px-5 py-3"
+          >
+            Learn More
+          </Link>
         </div>
 
         {/* RIGHT SIDE */}
