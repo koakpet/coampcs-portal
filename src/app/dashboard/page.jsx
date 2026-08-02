@@ -1,4 +1,4 @@
-import Topbar from "@/components/dashboard/Topbar";
+import Topbar from "@/components/layout/Topbar";
 import WelcomeCard from "@/components/dashboard/WelcomeCard";
 import SavingsOverview from "@/components/dashboard/SavingsOverview";
 import LoanOverview from "@/components/dashboard/LoanOverview";

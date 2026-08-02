@@ -5,7 +5,7 @@ import ProductShowcase from "./ProductShowcase";
 export default function Hero() {
   return (
     <>
-      <div className="pt-30 pb-15 px-6 flex">
+      <div className="pt-30 pb-15 px-1 md:px-6 flex">
         {/* LEFT SIDE */}
         <div className="flex-1">
           <div className="inline-flex px-3 py-1 rounded-full text-slate-600 border border-slate-300 bg-slate-200">

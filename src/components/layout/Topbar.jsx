@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "../layout/Logo";
+import Logo from "./Logo";
 import Image from "next/image";
 import {Bell, Search} from "lucide-react";
 
@@ -24,13 +24,15 @@ export default function Topbar() {
             {/* User Details */}
             <button className="flex items-center gap-1.5">
               {/* User Image */}
-              <div className="overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]">
+              <div className="relative overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]">
                 <Image
                   src="/user.jpg"
                   width={120}
                   height={120}
                   alt="user_image"
                 />
+
+                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
               </div>
 
               {/* Username */}
