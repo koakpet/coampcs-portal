@@ -11,6 +11,7 @@ export default function Hero() {
 
   return (
     <>
+      {open && <LoginForm />}
       <div className="pt-30 pb-15 px-1 md:px-6 flex">
         {/* LEFT SIDE */}
         <div className="flex-1">
@@ -35,12 +36,20 @@ export default function Hero() {
 
           {/* Redirect Buttons */}
 
-          <Link
-            href="/about"
-            className="rounded-full border border-slate-300 hover:border-[#0B1F4D] px-5 py-3"
-          >
-            Learn More
-          </Link>
+          <div className="flex gap-3">
+            <button
+              onClick={() => setOpen(!open)}
+              className="rounded-full border border-[#0B1F4D] bg-[#0B1F4D] hover:bg-[#0233a5] text-white hover:border-[#0B1F4D] px-5 py-3"
+            >
+              Member Login
+            </button>
+            <Link
+              href="/about"
+              className="rounded-full border border-slate-300 hover:border-[#0B1F4D] px-5 py-3"
+            >
+              Learn More
+            </Link>
+          </div>
         </div>
 
         {/* RIGHT SIDE */}
