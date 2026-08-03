@@ -12,7 +12,7 @@ export default function LoginForm() {
     <>
       {close && (
         <section className="fixed insert-0 h-screen w-screen">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="w-96 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl">
               <button
                 onClick={() => setClose(false)}
