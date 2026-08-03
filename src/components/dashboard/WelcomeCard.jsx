@@ -27,7 +27,7 @@ export default function WelcomeCard() {
         <div className="inline-flex px-4 py-2 rounded-full  bg-white/15 text-sm font-medium">
           • Member Dashboard •
         </div>
-        <div className="font-bold text-5xl md:text-4xl pt-3">
+        <div className="font-bold text-3xl md:text-4xl pt-3">
           {greeting}, Kohly Akpet
         </div>
         <p className="inline-flex pt-1.5 text-sm">

@@ -16,10 +16,12 @@ export default function LoanOverview() {
       {/* Header */}
 
       <div className="w-full flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-slate-900">Loan Overview</h2>
+        <div className="flex flex-col">
+          <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+            Loan Overview
+          </h2>
 
-          <p className="mt-2 text-slate-500">
+          <p className="text-sm text-slate-500">
             Track your active loan, repayments and upcoming payment schedule.
           </p>
         </div>
@@ -33,9 +35,9 @@ export default function LoanOverview() {
 
         <Link
           href="/dashboard/loans"
-          className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#0B1F4D] hover:text-[#0B1F4D]"
+          className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-green-800 hover:text-green-800"
         >
-          Apply for Loan
+          Apply<span className="hidden md:inline">for Loan</span>
           <ArrowRight size={16} />
         </Link>
       </div>

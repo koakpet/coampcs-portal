@@ -58,20 +58,19 @@ export default function SavingsOverview() {
         {/* Header */}
 
         <div className="w-full flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900">
+          <div className="flex flex-col">
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900">
               Savings Overview
             </h2>
-            <p className="mt-2 text-slate-500">
+            <p className="text-sm text-slate-500">
               All your current savings balances; monitor your financial growth.
             </p>
           </div>
           <Link
             href="/dashboard/statements"
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#0B1F4D] hover:text-[#0B1F4D]"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-indigo-600 hover:text-indigo-600"
           >
-            View Statement
-            <ArrowRight size={16} />
+            Action <ArrowRight size={16} />
           </Link>
         </div>
 
