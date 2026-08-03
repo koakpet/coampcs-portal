@@ -17,15 +17,16 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0">
-      <nav className="bg-white/80 border border-slate-200/70 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.05)]">
-        <div className="flex h-20 items-center justify-between px-3 md:px-6">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-1">
-            <Logo />
-          </Link>
+    <>
+      <header className="fixed inset-x-0 top-0">
+        <nav className="bg-white/80 border border-slate-200/70 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.05)]">
+          <div className="flex h-20 items-center justify-between px-3 md:px-6">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-1">
+              <Logo />
+            </Link>
 
-          {/* <div className="hidden md:flex items-center gap-9">
+            {/* <div className="hidden md:flex items-center gap-9">
             <div className="items-center gap-5 flex">
               {navLinks.map((link) => {
                 return (
@@ -78,17 +79,24 @@ export default function Navbar() {
             </Link>
           </div>
         )} */}
-          <button
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle Login"
-            aria-expanded={open}
-            className="bg-[#0B1F4D] rounded-lg px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            <span className="text-white text-sm font-semibold">Login</span>
-          </button>
-        </div>
-      </nav>
+            {/* <button className="bg-[#0B1F4D] rounded-lg px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+              <span className="text-white text-sm font-semibold">Login</span>
+            </button> */}
+
+            <button
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle Login"
+              aria-expanded={open}
+              className="bg-[#0B1F4D] rounded-lg px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              <span className="text-white text-sm font-semibold">Login</span>
+            </button>
+          </div>
+        </nav>
+
+        {/* {open && <LoginForm />} */}
+      </header>
       {open && <LoginForm />}
-    </header>
+    </>
   );
 }

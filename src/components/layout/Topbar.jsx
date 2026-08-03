@@ -16,24 +16,24 @@ export default function Topbar() {
           </div>
 
           <div className="flex items-center gap-2 md:gap-6">
-            <button className="relative rounded-2xl bg-slate-100 p-3 hover:bg-slate-200">
+            <button className="hidden md:block relative rounded-2xl bg-slate-100 p-3 hover:bg-slate-200">
               <Bell size={18} className="text-slate-600" />
               <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
             </button>
 
             {/* User Details */}
-            <button className="flex items-center gap-1.5">
+            <button className="relative flex items-center gap-1.5">
               {/* User Image */}
-              <div className="relative overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]">
+              <div className="overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]">
                 <Image
                   src="/user.jpg"
                   width={120}
                   height={120}
                   alt="user_image"
                 />
-
-                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
               </div>
+
+              <span className="md:hidden absolute right-0 top-0 h-2 w-2 rounded-full bg-red-500" />
 
               {/* Username */}
               <div className="hidden md:flex flex-col items-start">
