@@ -9,7 +9,7 @@ export default function DashboardPage() {
   return (
     <>
       <Topbar />
-      <div className="pt-27 px-12 flex gap-3">
+      <div className="pt-27 px-3 md:px-12 md:flex gap-3">
         <div className="flex-1 flex flex-col gap-3 min-w-0">
           <WelcomeCard />
           <SavingsOverview />

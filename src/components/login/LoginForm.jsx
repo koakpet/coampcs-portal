@@ -11,12 +11,16 @@ export default function LoginForm() {
   return (
     <>
       {close && (
-        <section
-          onClick={() => setClose(false)}
-          className="fixed insert-0 h-screen w-screen"
-        >
+        <section className="fixed insert-0 h-screen w-screen">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl">
+              <button
+                onClick={() => setClose(false)}
+                className="absolute top-3 right-6 text-[#0B1F4D]"
+              >
+                <X size={15} />
+              </button>
+
               <h1 className="py-9 text-3xl font-bold text-slate-900 text-center">
                 Member Login
               </h1>
