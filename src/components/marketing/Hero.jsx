@@ -39,7 +39,7 @@ export default function Hero() {
           <div className="flex gap-3">
             <button
               onClick={() => setOpen(!open)}
-              className="rounded-full border border-[#0B1F4D] bg-[#0B1F4D] hover:bg-[#0233a5] text-white hover:border-[#0B1F4D] px-5 py-3"
+              className="rounded-full border border-[#0B1F4D] bg-[#0B1F4D] hover:opacity-90 text-white px-5 py-3"
             >
               Member Login
             </button>

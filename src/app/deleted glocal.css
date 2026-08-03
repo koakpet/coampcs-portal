@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* ==========================================
+   DESIGN TOKENS
+========================================== */
+
+:root {
+  /* Brand Colors */
+  --primary: #0b1f4d;
+  --primary-foreground: #ffffff;
+
+  --secondary: #2e7d32;
+  --secondary-foreground: #ffffff;
+
+  --accent: #c8a24a;
+
+  /* Backgrounds */
+  --background: #f8fafc;
+  --surface: #ffffff;
+
+  /* Text */
+  --foreground: #111827;
+  --muted-foreground: #6b7280;
+
+  /* Borders */
+  --border: #e5e7eb;
+
+  /* Status */
+  --success: #16a34a;
+  --warning: #f59e0b;
+  --danger: #dc2626;
+
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 18px 40px rgba(15, 23, 42, 0.12);
+
+  /* Max Width */
+  --container-width: 1280px;
+}
+
+/* ==========================================
+   BASE
+========================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* * {
+  margin: 0;
+} */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ==========================================
+   LINKS
+========================================== */
+
+a {
+  text-decoration: none;
+}
+
+/* ==========================================
+   IMAGES
+========================================== */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+button {
+  cursor: pointer;
+  border: none;
+  font: inherit;
+}
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ==========================================
+   SELECTION
+========================================== */
+
+::selection {
+  background: #2e7d32;
+  color: white;
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #edf2f7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+} */
