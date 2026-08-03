@@ -54,7 +54,7 @@ const savings = [
 export default function SavingsOverview() {
   return (
     <>
-      <section className="p-6 flex flex-col items-start gap-6 border rounded-2xl border-slate-200 shadow-sm bg-white">
+      <section className="p-3 md:p-6 flex flex-col items-start gap-6 border rounded-2xl border-slate-200 shadow-sm bg-white">
         {/* Header */}
 
         <div className="w-full flex items-center justify-between">
@@ -84,17 +84,17 @@ export default function SavingsOverview() {
               return (
                 <div
                   key={item.title}
-                  className={`w-60 px-6 py-9 border rounded-2xl ${item.border} ${item.bgColor} hover:shadow-lg`}
+                  className={`w-60 px-3 md:px-6 py-6 md:py-9 border rounded-2xl ${item.border} ${item.bgColor} hover:shadow-lg`}
                 >
                   <div className="flex items-center justify-between">
                     <p className="font-medium text-slate-500">{item.title} </p>
 
-                    <p className="p-2 rounded-sm bg-white shadow-sm">
-                      <Icon className={item.iconColor} size={27} />
+                    <p className="p-2 rounded-md md:rounded-sm bg-white shadow-sm">
+                      <Icon className={item.iconColor} size={30} />
                     </p>
                   </div>
 
-                  <h3 className="pt-12 text-2xl font-bold text-right text-slate-900">
+                  <h3 className="pt-9 md:pt-12 text-2xl font-bold text-right text-slate-900">
                     ₦{item.amount}
                   </h3>
                   <p className="text-xs text-right text-slate-400">
