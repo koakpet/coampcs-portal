@@ -94,7 +94,7 @@ export default function ProductShowcase() {
               return (
                 <div
                   key={feature.title}
-                  className="group rounded-2xl border border-slate-200 bg-slate-50 p-2 transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:bg-white hover:shadow-lg"
+                  className="group rounded-2xl border border-slate-200 bg-slate-50 p-2 transition-all duration-300 hover:border-slate-300 hover:bg-white hover:shadow-lg"
                 >
                   <div className="mb-3 flex items-center justify-between">
                     <div

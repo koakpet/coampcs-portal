@@ -4,7 +4,7 @@ import Link from "next/link";
 import {ArrowRight} from "lucide-react";
 import ProductShowcase from "./ProductShowcase";
 import {useState} from "react";
-import LoginForm from "../login/LoginForm";
+import LoginForm from "../popups/LoginForm";
 
 export default function Hero() {
   const [open, setOpen] = useState(false);
@@ -36,7 +36,7 @@ export default function Hero() {
             </p>
 
             {/* Redirect Buttons */}
-
+            {/* LOGIN Button */}
             <div className="flex gap-3">
               <button
                 onClick={() => setOpen(!open)}
@@ -44,6 +44,8 @@ export default function Hero() {
               >
                 Member Login
               </button>
+
+              {/* ABOUT Link */}
               <Link
                 href="/about"
                 className="rounded-full border border-slate-300 hover:border-[#0B1F4D] px-5 py-3"

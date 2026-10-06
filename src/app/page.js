@@ -1,15 +1,12 @@
-import Navbar from "@/components/layout/Navbar";
-import Hero from "@/components/marketing/Hero";
-import Signature from "@/components/layout/Signature";
+import Topbar from "@/components/layout/Topbar";
+import Hero from "@/components/homepage/Hero";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <Topbar />
 
       <Hero />
-
-      <Signature />
     </>
   );
 }

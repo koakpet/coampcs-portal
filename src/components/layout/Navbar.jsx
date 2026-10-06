@@ -2,101 +2,65 @@
 
 import Link from "next/link";
 import Logo from "./Logo";
-import {Menu, X} from "lucide-react";
+import Image from "next/image";
+import {Bell, Search} from "lucide-react";
+import Sidebar from "./Sidebar";
 import {useState} from "react";
-import LoginForm from "../login/LoginForm";
 
-// const navLinks = [
-//   {name: "About", href: "/about"},
-//   {name: "Services", href: "/services"},
-//   {name: "Notices", href: "/notices"},
-//   {name: "Contact", href: "/contact"},
-// ];
+export default function Navbar({user, memberships, menu}) {
+  const cooperative = memberships;
 
-export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <header className="fixed inset-x-0 top-0">
-        <nav className="bg-white/80 border border-slate-200/70 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.05)]">
-          <div className="flex h-20 items-center justify-between px-3 md:px-6">
+        <nav className="px-3 md:px-6 flex justify-between items-center bg-white/80 border border-slate-200/70 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.05)]">
+          <div className="flex h-20 items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-1">
-              <Logo />
-            </Link>
-
-            {/* <div className="hidden md:flex items-center gap-9">
-            <div className="items-center gap-5 flex">
-              {navLinks.map((link) => {
-                return (
-                  <Link key={link.name} href={link.href}>
-                    <span className="text-sm font-medium text-gray-600 transition hover:text-[#0B1F4D]">
-                      {link.name}
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
-
-            <Link
-              href="/login"
-              className="hidden md:block bg-[#0B1F4D] rounded-lg px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              <span className="text-white text-sm font-semibold">Login</span>
+            <Link href="/">
+              <Logo cooperative={cooperative} />
             </Link>
           </div>
 
-          <button
-            className="rounded-lg p-2 transition hover:bg-slate-100 md:hidden"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle navigation"
-            aria-expanded={open}
-          >
-            {open ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+          <div className="flex items-center gap-2 md:gap-6">
+            <button className="hidden md:block relative rounded-2xl bg-slate-100 p-3 hover:bg-slate-200">
+              <Bell size={18} className="text-slate-600" />
+              <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
+            </button>
 
-        {open && (
-          <div className="transition-all duration-500 flex flex-col gap-9 items-start md:hidden border-t border-slate-200 px-6 py-6">
-            <div className="flex flex-col gap-3">
-              {navLinks.map((link) => {
-                return (
-                  <Link key={link.name} href={link.href}>
-                    <span className="text-sm font-medium text-gray-600 transition hover:text-[#0B1F4D]">
-                      {link.name}
-                    </span>
-                  </Link>
-                );
-              })}
-            </div> 
-
-            <Link
-              href="/login"
-              className="bg-[#0B1F4D] rounded-lg px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              <span className="text-white text-sm font-semibold">Login</span>
-            </Link>
-          </div>
-        )} */}
-            {/* <button className="bg-[#0B1F4D] rounded-lg px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
-              <span className="text-white text-sm font-semibold">Login</span>
-            </button> */}
-
+            {/* User Details */}
             <button
               onClick={() => setOpen(!open)}
-              aria-label="Toggle Login"
+              aria-label="Toggle Sidebar"
               aria-expanded={open}
-              className="bg-[#0B1F4D] rounded-lg px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+              className="relative flex items-center gap-1.5 cursor-pointer"
             >
-              <span className="text-white text-sm font-semibold">Login</span>
+              {/* User Image */}
+              <div className="overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]">
+                <Image
+                  src="/user.jpg"
+                  width={120}
+                  height={120}
+                  alt="user_image"
+                />
+              </div>
+
+              <span className="md:hidden absolute right-0 top-0 h-2 w-2 rounded-full bg-red-500" />
+
+              {/* Username */}
+              <div className="hidden md:flex flex-col items-start">
+                <p className="text-xs font-semibold text-slate-900">
+                  {user.firstName} {user.lastName}
+                </p>
+                <p className="text-xs text-slate-500">{memberships.role}</p>
+              </div>
             </button>
           </div>
         </nav>
-
-        {/* {open && <LoginForm />} */}
       </header>
-      {open && <LoginForm />}
+
+      {open && <Sidebar menu={menu} admin={cooperative} />}
     </>
   );
 }
