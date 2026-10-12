@@ -86,7 +86,7 @@ export default function SelectCooperative({cooperative, onClose}) {
               </p>
 
               <p className="mt-1 text-sm text-slate-500">
-                Membership No: {item.membership_number}
+                Membership No: {item.membership_no}
               </p>
 
               <p className="mt-1 text-xs text-slate-400">{item.role}</p>

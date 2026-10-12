@@ -2,17 +2,17 @@ import Link from "next/link";
 import {
   PiggyBank,
   Wallet,
-  Landmark,
+  Gift,
   ArrowRight,
   AlertCircle,
   House,
+  LandPlot,
 } from "lucide-react";
 
 const savings = [
   {
     title: "Thrift",
-    amount: "2,350,000",
-    contribution: "5,000",
+    dataKey: "thrift",
     icon: PiggyBank,
     bgColor: "bg-emerald-50",
     iconColor: "text-emerald-600",
@@ -21,8 +21,7 @@ const savings = [
   },
   {
     title: "Special Savings",
-    amount: "480,000",
-    contribution: "3,000",
+    dataKey: "special_savings",
     icon: Wallet,
     bgColor: "bg-blue-50",
     iconColor: "text-blue-600",
@@ -30,28 +29,52 @@ const savings = [
     description: "Savings for personal goals",
   },
   {
+    title: "Commodity",
+    dataKey: "commodity",
+    icon: Gift,
+    bgColor: "bg-blue-50",
+    iconColor: "text-blue-600",
+    border: "border-blue-100",
+    description: "Xmas commodity",
+  },
+  {
     title: "Rent",
-    amount: "830,000",
-    contribution: "4,000",
+    dataKey: "rent",
     icon: House,
     bgColor: "bg-[#0B1F4D]/5",
     iconColor: "text-[#0B1F4D]",
     border: "border-[#0B1F4D]/10",
-    description: "Special savings for rent",
+    description: "Savings for rent",
   },
   {
-    title: "Total Savings",
-    amount: "2,830,000",
-    contribution: "5,000",
-    icon: Landmark,
+    title: "Land Payment",
+    dataKey: "land",
+    icon: LandPlot,
     bgColor: "bg-[#0B1F4D]/5",
     iconColor: "text-[#0B1F4D]",
     border: "border-[#0B1F4D]/10",
-    description: "Combined savings balance",
+    description: "Land payment tracker",
   },
+  // {
+  //   title: "Total Savings",
+  //   amount: "2,830,000",
+  //   contribution: "5,000",
+  //   icon: Landmark,
+  //   bgColor: "bg-[#0B1F4D]/5",
+  //   iconColor: "text-[#0B1F4D]",
+  //   border: "border-[#0B1F4D]/10",
+  //   description: "Combined savings balance",
+  // },
 ];
 
-export default function SavingsOverview() {
+function formatNaira(amount) {
+  return Number(amount ?? 0).toLocaleString("en-NG", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+export default function SavingsOverview({deductions, mandate}) {
   return (
     <>
       <section className="p-3 md:p-6 flex flex-col items-start gap-6 border rounded-2xl border-slate-200 shadow-sm bg-white">
@@ -77,32 +100,50 @@ export default function SavingsOverview() {
         {/* Saving Cards */}
         <div className="w-full overflow-x-auto scrollbar-none">
           <div className="flex gap-3 w-max">
-            {savings.map((item) => {
-              const Icon = item.icon;
+            {savings
+              .filter((item) => {
+                if (item.dataKey === "rent" || item.dataKey === "land") {
+                  return Number(mandate?.[item.dataKey] ?? 0) > 0;
+                }
 
-              return (
-                <div
-                  key={item.title}
-                  className={`w-60 px-3 md:px-6 py-6 md:py-9 border rounded-2xl ${item.border} ${item.bgColor} hover:shadow-lg`}
-                >
-                  <div className="flex items-center justify-between">
-                    <p className="font-medium text-slate-500">{item.title} </p>
+                return true;
+              })
+              .map((item) => {
+                const Icon = item.icon;
 
-                    <p className="p-2 rounded-md md:rounded-sm bg-white shadow-sm">
-                      <Icon className={item.iconColor} size={30} />
+                return (
+                  <div
+                    key={item.title}
+                    className={`w-60 px-3 md:px-6 py-6 md:py-9 border rounded-2xl ${item.border} ${item.bgColor} hover:shadow-lg`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <p className="font-medium text-slate-500">
+                        {item.title}{" "}
+                      </p>
+
+                      <p className="p-2 rounded-md md:rounded-sm bg-white shadow-sm">
+                        <Icon className={item.iconColor} size={30} />
+                      </p>
+                    </div>
+
+                    <h3 className="pt-9 md:pt-12 text-2xl font-bold text-right text-slate-900">
+                      ₦
+                      {item.dataKey
+                        ? formatNaira(deductions?.[item.dataKey])
+                        : item.amount}
+                    </h3>
+                    <p className="text-xs text-right text-slate-400">
+                      Monthly Deduction:
+                      <span className="text-slate-500">
+                        ₦
+                        {item.dataKey
+                          ? formatNaira(mandate?.[item.dataKey])
+                          : item.amount}
+                      </span>
                     </p>
                   </div>
-
-                  <h3 className="pt-9 md:pt-12 text-2xl font-bold text-right text-slate-900">
-                    ₦{item.amount}
-                  </h3>
-                  <p className="text-xs text-right text-slate-400">
-                    Monthly Deduction:
-                    <span className="text-slate-500">₦{item.contribution}</span>
-                  </p>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
       </section>

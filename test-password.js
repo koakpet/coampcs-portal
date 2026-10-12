@@ -1,4 +1,4 @@
-import { hashPassword, comparePassword } from "./src/lib/auth/password.js";
+import {hashPassword, comparePassword} from "./src/lib/auth/password.js";
 
 const password = "Password";
 

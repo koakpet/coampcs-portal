@@ -8,6 +8,8 @@ import LoanOverview from "@/components/dashboard/members/LoanOverview";
 import QuickActions from "@/components/dashboard/members/QuickActions";
 import SelectCooperative from "@/components/popups/SelectCooperative";
 import {getSelectedCooperative} from "@/lib/auth/getSelectedCooperative";
+import {getDeductionTotals} from "@/lib/queries/deductions";
+import {getMandate} from "@/lib/queries/mandate";
 import NotificationsPanel from "@/components/dashboard/members/NotificationsPanel";
 
 export default async function DashboardPage() {
@@ -35,6 +37,10 @@ export default async function DashboardPage() {
     }
   }
 
+  const deductionsTotal = await getDeductionTotals(selectedCooperative.id);
+
+  const mandateDeductions = await getMandate(selectedCooperative.id);
+
   return (
     <>
       <Navbar
@@ -45,7 +51,10 @@ export default async function DashboardPage() {
       <div className="pt-27 px-3 md:px-12 md:flex gap-3">
         <div className="flex-1 flex flex-col gap-3 min-w-0">
           <WelcomeCard user={user} memberships={selectedCooperative} />
-          <SavingsOverview />
+          <SavingsOverview
+            deductions={deductionsTotal}
+            mandate={mandateDeductions}
+          />
           <LoanOverview />
         </div>
         <div className="w-80">

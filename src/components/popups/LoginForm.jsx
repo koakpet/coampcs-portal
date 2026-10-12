@@ -4,12 +4,11 @@ import {redirect, useRouter} from "next/navigation";
 import Link from "next/link";
 import {useState} from "react";
 import {X, Eye, EyeOff, Lock, ShieldCheck, User} from "lucide-react";
-import {escapeIdentifier} from "pg";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [close, setClose] = useState(true);
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

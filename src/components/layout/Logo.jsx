@@ -20,7 +20,7 @@ export default function Logo({cooperative}) {
       </div>
       <div>
         <p className="text-sm md:text-sm font-semibold text-slate-900">
-          {coopName ? coopName.slice(0, -4).trim() : "Court of Appeal Staff"}
+          {coopName ? coopName.slice(0, -34).trim() : "Court of Appeal Staff"}
         </p>
         <p className="text-xs text-slate-500">
           Multi-Purpose Cooperative Society

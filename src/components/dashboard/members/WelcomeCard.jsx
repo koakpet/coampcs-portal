@@ -34,7 +34,7 @@ export default function WelcomeCard({user, memberships}) {
           <UserCircle2 size={18} /> &nbsp;Membership No.: &nbsp;
           <span className="font-semibold">
             {" "}
-            {memberships?.membership_number || "Not available"}
+            {memberships?.membership_no || "Not available"}
           </span>
         </p>
       </div>

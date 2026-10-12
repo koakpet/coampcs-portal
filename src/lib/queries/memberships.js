@@ -7,7 +7,7 @@ export async function getMembershipByUserId(userId) {
             id,
             cooperative_code,
             cooperative_name,
-            membership_number,
+            membership_no,
             role,
             status,
             joined_date
@@ -28,7 +28,7 @@ export async function getMembershipByIdForUser(membershipId, userId) {
       id,
       cooperative_code,
       cooperative_name,
-      membership_number,
+      membership_no,
       role,
       status,
       joined_date
