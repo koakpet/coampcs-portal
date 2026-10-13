@@ -12,10 +12,10 @@ export async function getDeductionTotals(memberId) {
             ), 0
         ) - COALESCE (
             (
-            SELECT SUM(p.amount) 
-            FROM payments p
-            WHERE p.member_id = $1
-            AND p.payment_type = 'Thrift withdrawal'
+            SELECT SUM(t.amount) 
+            FROM transactions t
+            WHERE t.member_id = $1
+            AND t.payment_type = 'Thrift withdrawal'
             ), 0
         ) AS thrift,
 
@@ -60,7 +60,7 @@ export async function getDeductionTotals(memberId) {
             WHERE d.member_id = $1
             )
         ) AS land
-  `,
+    `,
     [memberId],
   );
 

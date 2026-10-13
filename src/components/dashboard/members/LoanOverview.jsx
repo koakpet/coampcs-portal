@@ -1,13 +1,21 @@
 import Link from "next/link";
 import {Landmark, CalendarDays, BadgeCheck, ArrowRight} from "lucide-react";
 
-export default function LoanOverview() {
+export default function LoanOverview({mandate, transaction}) {
+  // Format amounts as Nigerian Naira
+  function formatNaira(amount) {
+    return Number(amount ?? 0).toLocaleString("en-NG", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+
   const loan = {
     status: "Active",
-    totalLoan: "1,000,000",
-    outstanding: "750,000",
-    monthlyRepayment: "25,000",
-    progress: 3, // Percentage repaid
+    totalLoan: transaction.total_loan,
+    outstanding: transaction.outstanding,
+    monthlyRepayment: mandate.loan_repayment,
+    progress: transaction.progress,
     standing: "Good standing",
   };
 
@@ -67,7 +75,7 @@ export default function LoanOverview() {
 
           <div className="w-60 rounded-2xl border border-slate-200 bg-slate-50 p-6">
             <div className="flex items-center justify-between">
-              <p className="font-medium text-slate-500">Original Loan </p>
+              <p className="font-medium text-slate-500">Loan Amount</p>
 
               <p className="p-2 rounded-sm bg-white shadow-sm">
                 <BadgeCheck size={34} className="text-emerald-600" />
@@ -76,7 +84,7 @@ export default function LoanOverview() {
 
             <div className="pt-15">
               <h3 className="pr-2 text-xl font-bold text-slate-900 text-right">
-                ₦{loan.totalLoan}
+                ₦{formatNaira(loan.totalLoan)}
               </h3>
             </div>
           </div>
@@ -92,7 +100,7 @@ export default function LoanOverview() {
 
             <div className="pt-15">
               <h3 className="pr-2 text-xl font-bold text-slate-900 text-right">
-                ₦{loan.monthlyRepayment}
+                ₦{formatNaira(loan.monthlyRepayment)}
               </h3>
             </div>
           </div>
@@ -123,20 +131,10 @@ export default function LoanOverview() {
             <p className="text-sm text-slate-500">Outstanding Balance</p>
 
             <h3 className="mt-2 text-3xl font-bold text-slate-900">
-              {loan.outstanding}
+              ₦{formatNaira(loan.outstanding)}
             </h3>
           </div>
         </div>
-      </div>
-
-      {/* Demo Notice */}
-
-      <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-4">
-        <p className="text-sm text-amber-800">
-          <strong>Presentation Mode:</strong> Loan values shown are
-          demonstration data for stakeholder review and do not represent actual
-          member records.
-        </p>
       </div>
     </section>
   );

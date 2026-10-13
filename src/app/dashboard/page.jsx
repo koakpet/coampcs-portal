@@ -10,6 +10,7 @@ import SelectCooperative from "@/components/popups/SelectCooperative";
 import {getSelectedCooperative} from "@/lib/auth/getSelectedCooperative";
 import {getDeductionTotals} from "@/lib/queries/deductions";
 import {getMandate} from "@/lib/queries/mandate";
+import {getTransactionsMade} from "@/lib/queries/transactions";
 import NotificationsPanel from "@/components/dashboard/members/NotificationsPanel";
 
 export default async function DashboardPage() {
@@ -38,8 +39,8 @@ export default async function DashboardPage() {
   }
 
   const deductionsTotal = await getDeductionTotals(selectedCooperative.id);
-
   const mandateDeductions = await getMandate(selectedCooperative.id);
+  const transactionsMade = await getTransactionsMade(selectedCooperative.id);
 
   return (
     <>
@@ -50,12 +51,33 @@ export default async function DashboardPage() {
       />
       <div className="pt-27 px-3 md:px-12 md:flex gap-3">
         <div className="flex-1 flex flex-col gap-3 min-w-0">
+          {/* Demo Notice */}
+          <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-4">
+            <p className="text-sm text-amber-800">
+              <strong>Development Notice:</strong> Please be notified that the
+              values shown may be incorrect as members full records have not
+              been uloaded to the dataase.
+            </p>
+          </div>
+
           <WelcomeCard user={user} memberships={selectedCooperative} />
           <SavingsOverview
             deductions={deductionsTotal}
             mandate={mandateDeductions}
           />
-          <LoanOverview />
+          <LoanOverview
+            mandate={mandateDeductions}
+            transaction={transactionsMade}
+          />
+
+          {/* Demo Notice */}
+          <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-4">
+            <p className="text-sm text-amber-800">
+              <strong>Development Notice:</strong> Please be notified that the
+              values shown may be incorrect as members full records have not
+              been uloaded to the dataase.
+            </p>
+          </div>
         </div>
         <div className="w-80">
           <QuickActions />

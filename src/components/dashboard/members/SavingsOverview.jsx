@@ -89,12 +89,12 @@ export default function SavingsOverview({deductions, mandate}) {
               All your current savings balances; monitor your financial growth.
             </p>
           </div>
-          <Link
+          {/* <Link
             href="/dashboard/statements"
             className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-indigo-600 hover:text-indigo-600"
           >
             Action <ArrowRight size={16} />
-          </Link>
+          </Link> */}
         </div>
 
         {/* Saving Cards */}
