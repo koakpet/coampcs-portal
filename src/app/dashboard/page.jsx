@@ -56,7 +56,7 @@ export default async function DashboardPage() {
             <p className="text-sm text-amber-800">
               <strong>Development Notice:</strong> Please be notified that the
               values shown may be incorrect as members full records have not
-              been uloaded to the dataase.
+              been completely uploaded to the dataase.
             </p>
           </div>
 
@@ -75,7 +75,7 @@ export default async function DashboardPage() {
             <p className="text-sm text-amber-800">
               <strong>Development Notice:</strong> Please be notified that the
               values shown may be incorrect as members full records have not
-              been uloaded to the dataase.
+              been completely uploaded to the dataase.
             </p>
           </div>
         </div>
