@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import {usePathname, useRouter} from "next/navigation";
+import Image from "next/image";
 import {
   LayoutDashboard,
-  PiggyBank,
-  Wallet,
   Landmark,
   FileText,
   Bell,
@@ -13,32 +13,32 @@ import {
   LogOut,
   Repeat2,
 } from "lucide-react";
-import {useRouter} from "next/navigation";
 import SelectCooperative from "../popups/SelectCooperative";
 import {useState} from "react";
 
-const items = [
+const links = [
   {name: "Dashboard", href: "/dashboard", icon: LayoutDashboard},
-  // {name: "Thrift Savings", href: "/dashboard/thrift", icon: PiggyBank},
-  // {name: "Special Savings", href: "/dashboard/special", icon: Wallet},
-  // {name: "Loans", href: "/dashboard/loans", icon: Landmark},
   {name: "Statements", href: "/dashboard/statements", icon: FileText},
+  {name: "Loan Summary", href: "/dashboard/loans", icon: Landmark},
   {name: "Notifications", href: "/dashboard/notifications", icon: Bell},
   {name: "Mandate", href: "/dashboard/settings", icon: Settings},
   {name: "Profile", href: "/dashboard/profile", icon: User},
 ];
 
+const baseClasses =
+  "flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition";
+const activeClasses = "bg-[#0B1F4D] text-white shadow-lg";
+const inactiveClasses =
+  "text-slate-600 hover:bg-slate-100 hover:text-slate-900";
+
 export default function Sidebar({menu, admin}) {
   const [showCooperatives, setShowCooperatives] = useState(false);
-
   const router = useRouter();
+  const pathname = usePathname();
 
   async function handleLogout() {
     try {
-      const response = await fetch("/api/auth/logout", {
-        method: "POST",
-      });
-
+      const response = await fetch("/api/auth/logout", {method: "POST"});
       const data = await response.json();
 
       if (data.success) {
@@ -51,30 +51,38 @@ export default function Sidebar({menu, admin}) {
 
   return (
     <>
-      <aside className="fixed mt-20 w-72 border-r border-slate-200 bg-white h-screen">
+      <aside className="fixed flex flex-col mt-20 pb-20 w-72 border-r border-slate-200 bg-white h-screen">
         <nav className="flex-1 space-y-1 p-4">
-          {items.map((item) => {
+          {links.map((item) => {
+            const isActive =
+              item.href === "/dashboard"
+                ? pathname === item.href
+                : pathname === item.href ||
+                  pathname.startsWith(item.href + "/");
+
             const Icon = item.icon;
 
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition ${
-                  item.name === "Dashboard"
-                    ? "bg-[#0B1F4D] text-white shadow-lg"
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-                }`}
+                aria-current={isActive ? "page" : undefined}
+                className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
               >
                 <Icon size={20} />
                 {item.name}
               </Link>
             );
           })}
-          {admin.role != "MEMBER" && (
+
+          {admin.role !== "Member" && (
             <Link
               href="/admin-dashboard"
-              className="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+              className={`${baseClasses} ${
+                pathname.startsWith("/admin-dashboard")
+                  ? activeClasses
+                  : inactiveClasses
+              }`}
             >
               <Repeat2 size={20} /> Admin Dashboard
             </Link>
@@ -82,7 +90,7 @@ export default function Sidebar({menu, admin}) {
 
           {menu.length > 1 && (
             <button
-              className="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+              className={`${baseClasses} ${inactiveClasses}`}
               type="button"
               onClick={() => setShowCooperatives(true)}
             >
@@ -91,16 +99,33 @@ export default function Sidebar({menu, admin}) {
           )}
         </nav>
 
-        <div className="border-t border-slate-200 p-4">
+        <div className="grid gap-3 py-4 mx-6">
           <button
             onClick={handleLogout}
-            className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+            className="flex w-full items-center gap-3 rounded-2xl py-3 text-sm font-medium text-red-600 transition hover:bg-slate-100 hover:text-slate-900"
           >
             <LogOut size={20} />
             Logout
           </button>
+
+          <div className="md:hidden justify-self-center flex gap-1.5">
+            <div className="overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]">
+              <Image src="/user.jpg" width={90} height={90} alt="user_image" />
+            </div>
+
+            <div className="flex flex-col ">
+              <p className="text-sm font-semibold text-slate-900">
+                Kohly Akpet{/* {user.firstName} {user.lastName} */}
+              </p>
+              <p className="text-xs text-slate-500">
+                Members
+                {/* {memberships.role} */}
+              </p>
+            </div>
+          </div>
         </div>
       </aside>
+
       {showCooperatives && (
         <SelectCooperative
           cooperative={menu}

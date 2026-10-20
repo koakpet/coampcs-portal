@@ -58,7 +58,7 @@ export async function POST(request) {
       return Response.json(
         {
           success: false,
-          message: "Invalid email or password",
+          message: "Invalid email, phone number or password",
         },
         {status: 401},
       );
@@ -72,7 +72,7 @@ export async function POST(request) {
       return Response.json(
         {
           success: false,
-          message: "Invalid email or password",
+          message: "Invalid email, phone number or password",
         },
         {status: 401},
       );

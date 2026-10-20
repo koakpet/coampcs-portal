@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Logo from "./Logo";
 import Image from "next/image";
-import {Bell, Search} from "lucide-react";
+import {Bell, Menu, Search} from "lucide-react";
 import Sidebar from "./Sidebar";
 import {useState} from "react";
 
@@ -23,7 +23,16 @@ export default function Navbar({user, memberships, menu}) {
             </Link>
           </div>
 
-          <div className="flex items-center gap-2 md:gap-6">
+          <button
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle Sidebar"
+            aria-expanded={open}
+            className="md:hidden cursor-pointer"
+          >
+            <Menu size={24} className="text-slate-600" />
+          </button>
+
+          <div className="hidden md:flex items-center md:gap-6">
             <button className="hidden md:block relative rounded-2xl bg-slate-100 p-3 hover:bg-slate-200">
               <Bell size={18} className="text-slate-600" />
               <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500" />
