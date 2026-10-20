@@ -18,10 +18,10 @@ import {useState} from "react";
 
 const links = [
   {name: "Dashboard", href: "/dashboard", icon: LayoutDashboard},
-  {name: "Statements", href: "/dashboard/statements", icon: FileText},
-  {name: "Loan Summary", href: "/dashboard/loans", icon: Landmark},
-  {name: "Notifications", href: "/dashboard/notifications", icon: Bell},
-  {name: "Mandate", href: "/dashboard/settings", icon: Settings},
+  // {name: "Statements", href: "/dashboard/statements", icon: FileText},
+  // {name: "Loan Summary", href: "/dashboard/loans", icon: Landmark},
+  // {name: "Notifications", href: "/dashboard/notifications", icon: Bell},
+  // {name: "Mandate", href: "/dashboard/settings", icon: Settings},
   {name: "Profile", href: "/dashboard/profile", icon: User},
 ];
 
