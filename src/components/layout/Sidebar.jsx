@@ -31,7 +31,7 @@ const activeClasses = "bg-[#0B1F4D] text-white shadow-lg";
 const inactiveClasses =
   "text-slate-600 hover:bg-slate-100 hover:text-slate-900";
 
-export default function Sidebar({menu, admin}) {
+export default function Sidebar({user, menu, admin}) {
   const [showCooperatives, setShowCooperatives] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -108,19 +108,16 @@ export default function Sidebar({menu, admin}) {
             Logout
           </button>
 
-          <div className="md:hidden justify-self-center flex gap-1.5">
+          <div className="md:hidden flex gap-1.5">
             <div className="overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]">
               <Image src="/user.jpg" width={90} height={90} alt="user_image" />
             </div>
 
             <div className="flex flex-col ">
               <p className="text-sm font-semibold text-slate-900">
-                Kohly Akpet{/* {user.firstName} {user.lastName} */}
+                {user.firstName} {user.lastName}
               </p>
-              <p className="text-xs text-slate-500">
-                Members
-                {/* {memberships.role} */}
-              </p>
+              <p className="text-xs text-slate-500">{admin.role}</p>
             </div>
           </div>
         </div>

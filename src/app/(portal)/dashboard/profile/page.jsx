@@ -1,4 +1,7 @@
+import {getPortalContext} from "@/lib/auth/getPortalContext";
+import Image from "next/image";
 import {
+  UserCircle2,
   UserRound,
   Mail,
   Phone,
@@ -11,7 +14,9 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const {user, selectedCooperative} = await getPortalContext();
+
   const member = {
     firstName: "Kohly",
     middleName: "M.",
@@ -30,234 +35,224 @@ export default function ProfilePage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-6 md:px-8 md:py-8">
-      <div className="mx-auto max-w-6xl space-y-6">
-        {/* Page heading */}
-        <div>
-          <p className="text-sm font-medium text-slate-500">
-            Dashboard / Profile
-          </p>
-
-          <h1 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
-            My Profile
-          </h1>
-
-          <p className="mt-2 text-sm text-slate-500 md:text-base">
-            View your member information and manage your personal details.
-          </p>
-        </div>
-
-        {/* Profile header */}
-        <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <div className="bg-gradient-to-r from-slate-900 to-blue-900 px-6 py-8 md:px-8">
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-4 border-white/20 bg-white/10 text-white">
-                <UserRound size={38} strokeWidth={1.5} />
+    <main className="min-h-screen bg-slate-50 px-4 pt-27 pb-6 md:px-8 md:pb-8">
+      {/* Profile header */}
+      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="bg-green-800 px-6 py-8 md:px-8">
+          <div className="flex justify-between items-end">
+            <div className="flex items-center gap-3">
+              <div className="overflow-hidden h-24 w-24 rounded-full border border-[#0B1F4D]">
+                <Image
+                  src="/user.jpg"
+                  width={240}
+                  height={240}
+                  alt="user_image"
+                />
               </div>
 
-              <div className="min-w-0 flex-1">
+              <div className="">
+                <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-200">
+                  <UserCircle2 size={15} />
+                  <span className="font-semibold">
+                    {selectedCooperative?.membership_no || "Not available"}
+                  </span>
+                </div>
+
                 <h2 className="text-xl font-semibold text-white md:text-2xl">
-                  {member.firstName} {member.middleName} {member.lastName}
+                  {user.firstName} {user.middleName} {user.lastName}
                 </h2>
 
-                <p className="mt-1 break-all text-sm text-blue-100">
-                  {member.email}
-                </p>
-
-                <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-200">
-                  <ShieldCheck size={15} />
-                  Verified member
-                </div>
-              </div>
-
-              <div className="self-start rounded-lg border border-white/20 px-4 py-2 text-sm font-medium text-white">
-                {member.status}
+                <p className="break-all text-sm text-blue-100">{user.email}</p>
               </div>
             </div>
+
+            <div className="rounded-lg border border-white/20 px-4 py-2 text-sm font-medium text-white">
+              {selectedCooperative.status}
+            </div>
           </div>
+        </div>
 
-          {/* Profile content */}
-          <div className="space-y-8 p-5 md:p-8">
-            {/* Personal information */}
-            <section>
-              <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <h3 className="font-semibold text-slate-900">
-                    Personal Information
-                  </h3>
-                  <p className="mt-1 text-sm text-slate-500">
-                    Your personal and contact details.
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
-                >
-                  <Pencil size={15} />
-                  Edit profile
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                <ProfileField
-                  label="First name"
-                  value={member.firstName}
-                  icon={<UserRound size={17} />}
-                />
-
-                <ProfileField
-                  label="Middle name"
-                  value={member.middleName}
-                  icon={<UserRound size={17} />}
-                />
-
-                <ProfileField
-                  label="Last name"
-                  value={member.lastName}
-                  icon={<UserRound size={17} />}
-                />
-
-                <ProfileField
-                  label="Email address"
-                  value={member.email}
-                  icon={<Mail size={17} />}
-                />
-
-                <ProfileField
-                  label="Phone number"
-                  value={member.phone}
-                  icon={<Phone size={17} />}
-                />
-
-                <ProfileField
-                  label="Date of birth"
-                  value={member.dateOfBirth}
-                  icon={<CalendarDays size={17} />}
-                />
-
-                <ProfileField
-                  label="Gender"
-                  value={member.gender}
-                  icon={<UserRound size={17} />}
-                />
-
-                <ProfileField
-                  label="Residential address"
-                  value={member.address}
-                  icon={<MapPin size={17} />}
-                />
-
-                <ProfileField
-                  label="City"
-                  value={member.city}
-                  icon={<MapPin size={17} />}
-                />
-
-                <ProfileField
-                  label="State"
-                  value={member.state}
-                  icon={<MapPin size={17} />}
-                />
-              </div>
-            </section>
-
-            <div className="border-t border-slate-100" />
-
-            {/* Employment information */}
-            <section>
-              <div className="mb-5">
+        {/* Profile content */}
+        <div className="space-y-8 p-5 md:p-8">
+          {/* Personal information */}
+          <section>
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+              <div>
                 <h3 className="font-semibold text-slate-900">
-                  Employment Information
+                  Personal Information
                 </h3>
                 <p className="mt-1 text-sm text-slate-500">
-                  Employment details recorded on your account.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                <ProfileField
-                  label="Employment date"
-                  value={member.employmentDate}
-                  icon={<BriefcaseBusiness size={17} />}
-                />
-              </div>
-            </section>
-
-            <div className="border-t border-slate-100" />
-
-            {/* Membership information: read-only */}
-            <section>
-              <div className="mb-5">
-                <h3 className="font-semibold text-slate-900">
-                  Membership Information
-                </h3>
-                <p className="mt-1 text-sm text-slate-500">
-                  These details are managed by the cooperative.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                <ProfileField
-                  label="Membership number"
-                  value={member.membershipNumber}
-                  icon={<ShieldCheck size={17} />}
-                />
-
-                <ProfileField
-                  label="Membership status"
-                  value={member.status}
-                  icon={<ShieldCheck size={17} />}
-                />
-
-                <ProfileField
-                  label="Member role"
-                  value={member.role}
-                  icon={<ShieldCheck size={17} />}
-                />
-              </div>
-            </section>
-
-            <div className="border-t border-slate-100" />
-
-            {/* Account security */}
-            <section>
-              <div className="mb-4">
-                <h3 className="font-semibold text-slate-900">
-                  Account & Security
-                </h3>
-                <p className="mt-1 text-sm text-slate-500">
-                  Protect access to your account.
+                  Your personal and contact details.
                 </p>
               </div>
 
               <button
                 type="button"
-                className="flex w-full items-center gap-4 rounded-xl border border-slate-200 p-4 text-left transition hover:bg-slate-50"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
               >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
-                  <LockKeyhole size={20} />
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-slate-900">
-                    Change password
-                  </p>
-                  <p className="mt-1 text-sm text-slate-500">
-                    Update your password to help keep your account secure.
-                  </p>
-                </div>
-
-                <ChevronRight size={20} className="shrink-0 text-slate-400" />
+                <Pencil size={15} />
+                Edit profile
               </button>
-            </section>
-          </div>
-        </section>
+            </div>
 
-        <p className="text-center text-xs text-slate-400">
-          Court of Appeal Calabar Staff Multi-Purpose Cooperative Society
-        </p>
-      </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <ProfileField
+                label="First name"
+                value={user.firstName}
+                icon={<UserRound size={17} />}
+              />
+
+              <ProfileField
+                label="Middle name"
+                value={user.middleName}
+                icon={<UserRound size={17} />}
+              />
+
+              <ProfileField
+                label="Last name"
+                value={user.lastName}
+                icon={<UserRound size={17} />}
+              />
+
+              <ProfileField
+                label="Email address"
+                value={user.email}
+                icon={<Mail size={17} />}
+              />
+
+              <ProfileField
+                label="Phone number"
+                value={user.phone}
+                icon={<Phone size={17} />}
+              />
+
+              <ProfileField
+                label="Date of birth"
+                value={user.dateOfBirth}
+                icon={<CalendarDays size={17} />}
+              />
+
+              <ProfileField
+                label="Gender"
+                value={user.gender}
+                icon={<UserRound size={17} />}
+              />
+
+              <ProfileField
+                label="Residential address"
+                value={member.address}
+                icon={<MapPin size={17} />}
+              />
+
+              <ProfileField
+                label="Division"
+                value={member.division}
+                icon={<MapPin size={17} />}
+              />
+
+              <ProfileField
+                label="State"
+                value={member.state}
+                icon={<MapPin size={17} />}
+              />
+            </div>
+          </section>
+
+          <div className="border-t border-slate-100" />
+
+          {/* Employment information */}
+          <section>
+            <div className="mb-5">
+              <h3 className="font-semibold text-slate-900">
+                Employment Information
+              </h3>
+              <p className="mt-1 text-sm text-slate-500">
+                Employment details recorded on your account.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <ProfileField
+                label="Employment date"
+                value={member.employmentDate}
+                icon={<BriefcaseBusiness size={17} />}
+              />
+            </div>
+          </section>
+
+          <div className="border-t border-slate-100" />
+
+          {/* Membership information: read-only */}
+          <section>
+            <div className="mb-5">
+              <h3 className="font-semibold text-slate-900">
+                Membership Information
+              </h3>
+              <p className="mt-1 text-sm text-slate-500">
+                These details are managed by the cooperative.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <ProfileField
+                label="Membership number"
+                value={member.membershipNumber}
+                icon={<ShieldCheck size={17} />}
+              />
+
+              <ProfileField
+                label="Membership status"
+                value={member.status}
+                icon={<ShieldCheck size={17} />}
+              />
+
+              <ProfileField
+                label="Member role"
+                value={member.role}
+                icon={<ShieldCheck size={17} />}
+              />
+            </div>
+          </section>
+
+          <div className="border-t border-slate-100" />
+
+          {/* Account security */}
+          <section>
+            <div className="mb-4">
+              <h3 className="font-semibold text-slate-900">
+                Account & Security
+              </h3>
+              <p className="mt-1 text-sm text-slate-500">
+                Protect access to your account.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              className="flex w-full items-center gap-4 rounded-xl border border-slate-200 p-4 text-left transition hover:bg-slate-50"
+            >
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
+                <LockKeyhole size={20} />
+              </div>
+
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium text-slate-900">
+                  Change password
+                </p>
+                <p className="mt-1 text-sm text-slate-500">
+                  Update your password to help keep your account secure.
+                </p>
+              </div>
+
+              <ChevronRight size={20} className="shrink-0 text-slate-400" />
+            </button>
+          </section>
+        </div>
+      </section>
+
+      <p className="text-center text-xs text-slate-400">
+        Court of Appeal Calabar Staff Multi-Purpose Cooperative Society
+      </p>
     </main>
   );
 }

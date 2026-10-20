@@ -69,7 +69,7 @@ export default function Navbar({user, memberships, menu}) {
         </nav>
       </header>
 
-      {open && <Sidebar menu={menu} admin={cooperative} />}
+      {open && <Sidebar user={user} menu={menu} admin={cooperative} />}
     </>
   );
 }
