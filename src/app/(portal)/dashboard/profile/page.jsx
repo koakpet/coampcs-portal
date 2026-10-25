@@ -32,9 +32,7 @@ export default async function ProfilePage() {
                 {user.firstName} {user.middleName} {user.lastName}
               </h2>
 
-              <p className="hidden md:inline-block break-all text-sm text-blue-100">
-                {user.email}
-              </p>
+              <p className="break-all text-sm text-blue-100">{user.email}</p>
             </div>
           </div>
         </div>
