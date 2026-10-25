@@ -63,7 +63,7 @@ export default function QuickActions() {
             <Link
               key={action.title}
               href={action.href}
-              className="group flex items-center justify-between rounded-2xl border border-slate-200 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#0B1F4D]/20 hover:bg-slate-50 hover:shadow-md"
+              className="group flex items-center justify-between rounded-2xl border border-slate-200 p-5 transition-all duration-300  hover:border-[#0B1F4D]/20 hover:bg-slate-50 hover:shadow-md"
             >
               <div className="flex items-center gap-4">
                 <div
@@ -85,7 +85,7 @@ export default function QuickActions() {
 
               <ArrowRight
                 size={20}
-                className="text-slate-400 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#0B1F4D]"
+                className="text-slate-400 transition-transform duration-300 group-hover:text-[#0B1F4D]"
               />
             </Link>
           );

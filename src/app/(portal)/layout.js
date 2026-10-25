@@ -1,4 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
+import QuickActions from "@/components/layout/QuickActions";
 import SelectCooperative from "@/components/popups/SelectCooperative";
 import {getPortalContext} from "@/lib/auth/getPortalContext";
 
@@ -16,8 +17,12 @@ export default async function PortalLayout({children}) {
         memberships={selectedCooperative}
         menu={memberships}
       />
-
-      {children}
+      <div className="pt-27 px-3 md:px-12 md:flex gap-3">
+        <div className="md:grow">{children}</div>
+        <div className="w-80">
+          <QuickActions />
+        </div>
+      </div>
     </>
   );
 }
