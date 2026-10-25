@@ -149,12 +149,6 @@ export default async function ProfilePage() {
                 value={member.division}
                 icon={<MapPin size={17} />}
               />
-
-              <ProfileField
-                label="State"
-                value={member.state}
-                icon={<MapPin size={17} />}
-              />
             </div>
           </section>
 
@@ -196,19 +190,19 @@ export default async function ProfilePage() {
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               <ProfileField
                 label="Membership number"
-                value={member.membershipNumber}
+                value={selectedCooperative.membershipNumber}
                 icon={<ShieldCheck size={17} />}
               />
 
               <ProfileField
                 label="Membership status"
-                value={member.status}
+                value={selectedCooperative.status}
                 icon={<ShieldCheck size={17} />}
               />
 
               <ProfileField
                 label="Member role"
-                value={member.role}
+                value={selectedCooperative.role}
                 icon={<ShieldCheck size={17} />}
               />
             </div>
