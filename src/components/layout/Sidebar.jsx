@@ -32,6 +32,7 @@ const inactiveClasses =
   "text-slate-600 hover:bg-slate-100 hover:text-slate-900";
 
 export default function Sidebar({user, menu, admin}) {
+  const [close, setClose] = useState(true);
   const [showCooperatives, setShowCooperatives] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -51,77 +52,85 @@ export default function Sidebar({user, menu, admin}) {
 
   return (
     <>
-      <aside className="fixed flex flex-col mt-20 pb-20 w-72 border-r border-slate-200 bg-white h-screen">
-        <nav className="flex-1 space-y-1 p-4">
-          {links.map((item) => {
-            const isActive =
-              item.href === "/dashboard"
-                ? pathname === item.href
-                : pathname === item.href ||
-                  pathname.startsWith(item.href + "/");
+      {close && (
+        <aside className="fixed flex flex-col mt-20 pb-20 w-72 border-r border-slate-200 bg-white h-screen">
+          <nav className="flex-1 space-y-1 p-4">
+            {links.map((item) => {
+              const isActive =
+                item.href === "/dashboard"
+                  ? pathname === item.href
+                  : pathname === item.href ||
+                    pathname.startsWith(item.href + "/");
 
-            const Icon = item.icon;
+              const Icon = item.icon;
 
-            return (
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={() => setClose(false)}
+                  className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
+                >
+                  <Icon size={20} />
+                  {item.name}
+                </Link>
+              );
+            })}
+
+            {admin.role !== "Member" && (
               <Link
-                key={item.name}
-                href={item.href}
-                aria-current={isActive ? "page" : undefined}
-                className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
+                href="/admin-dashboard"
+                className={`${baseClasses} ${
+                  pathname.startsWith("/admin-dashboard")
+                    ? activeClasses
+                    : inactiveClasses
+                }`}
               >
-                <Icon size={20} />
-                {item.name}
+                <Repeat2 size={20} /> Admin Dashboard
               </Link>
-            );
-          })}
+            )}
 
-          {admin.role !== "Member" && (
-            <Link
-              href="/admin-dashboard"
-              className={`${baseClasses} ${
-                pathname.startsWith("/admin-dashboard")
-                  ? activeClasses
-                  : inactiveClasses
-              }`}
-            >
-              <Repeat2 size={20} /> Admin Dashboard
-            </Link>
-          )}
+            {menu.length > 1 && (
+              <button
+                className={`${baseClasses} ${inactiveClasses}`}
+                type="button"
+                onClick={() => setShowCooperatives(true)}
+              >
+                <Repeat2 size={20} /> Switch Cooperative
+              </button>
+            )}
+          </nav>
 
-          {menu.length > 1 && (
+          <div className="grid gap-3 py-4 mx-6">
             <button
-              className={`${baseClasses} ${inactiveClasses}`}
-              type="button"
-              onClick={() => setShowCooperatives(true)}
+              onClick={handleLogout}
+              className="flex w-full items-center gap-3 rounded-2xl py-3 text-sm font-medium text-red-600 transition hover:bg-slate-100 hover:text-slate-900"
             >
-              <Repeat2 size={20} /> Switch Cooperative
+              <LogOut size={20} />
+              Logout
             </button>
-          )}
-        </nav>
 
-        <div className="grid gap-3 py-4 mx-6">
-          <button
-            onClick={handleLogout}
-            className="flex w-full items-center gap-3 rounded-2xl py-3 text-sm font-medium text-red-600 transition hover:bg-slate-100 hover:text-slate-900"
-          >
-            <LogOut size={20} />
-            Logout
-          </button>
+            <div className="md:hidden flex gap-1.5">
+              <div className="overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]">
+                <Image
+                  src="/user.jpg"
+                  width={90}
+                  height={90}
+                  alt="user_image"
+                />
+              </div>
 
-          <div className="md:hidden flex gap-1.5">
-            <div className="overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]">
-              <Image src="/user.jpg" width={90} height={90} alt="user_image" />
-            </div>
-
-            <div className="flex flex-col ">
-              <p className="text-sm font-semibold text-slate-900">
-                {user.firstName} {user.lastName}
-              </p>
-              <p className="text-xs text-slate-500">{admin.role}</p>
+              <div className="flex flex-col ">
+                <p className="text-sm font-semibold text-slate-900">
+                  {user.firstName} {user.lastName}
+                </p>
+                <p className="text-xs text-slate-500">{admin.role}</p>
+              </div>
             </div>
           </div>
-        </div>
-      </aside>
+        </aside>
+      )}
 
       {showCooperatives && (
         <SelectCooperative

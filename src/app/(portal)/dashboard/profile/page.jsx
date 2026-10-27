@@ -1,9 +1,11 @@
 import Image from "next/image";
 import {getPortalContext} from "@/lib/auth/getPortalContext";
-import {UserCircle} from "lucide-react";
+import {UserCircle, Pencil} from "lucide-react";
 
 export default async function ProfilePage() {
   const {user, selectedCooperative} = await getPortalContext();
+
+  console.log(user);
 
   return (
     <>
@@ -39,13 +41,45 @@ export default async function ProfilePage() {
 
         <div>
           {/* Personal Info */}
-          <div className="py-3 mx-3  border-b border-slate-200">
-            <h3 className="font-semibold text-slate-900">
-              Personal Information
-            </h3>
-            <p className="mt-1 text-sm text-slate-500">
-              Your personal and contact details.
-            </p>
+          <div className="flex items-center justify-between p-3">
+            <div>
+              <h3 className="font-semibold text-slate-900">
+                Personal Information
+              </h3>
+              <p className="text-sm text-slate-500">
+                Your personal and contact details.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+            >
+              <Pencil size={15} />
+              <span className="hidden md:inline-block">Edit profile</span>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3">
+            <div>
+              <p className="text-sm text-slate-500">First Name</p>
+              <p className="font-medium text-slate-900">
+                {user.firstName || "Not provided"}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-sm text-slate-500">Middle Name</p>
+              <p className="font-medium text-slate-900">
+                {user.middleName || "Not provided"}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-sm text-slate-500">Last Name</p>
+              <p className="font-medium text-slate-900">
+                {user.lastName || "Not provided"}
+              </p>
+            </div>
           </div>
         </div>
       </div>
