@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import pool from "@/lib/db";
 
+// Create a new login session
 export async function createSession(userId) {
   const sessionToken = crypto.randomBytes(32).toString("hex");
 
@@ -10,25 +11,27 @@ export async function createSession(userId) {
     .digest("hex");
 
   const expiresAt = new Date();
-
   expiresAt.setDate(expiresAt.getDate() + 7);
 
   await pool.query(
     `
-    INSERT INTO sessions (
-      user_id,
-      token_hash,
-      expires_at
-    )
-    VALUES ($1, $2, $3)
+      INSERT INTO sessions (
+        user_id,
+        token_hash,
+        expires_at
+      )
+      VALUES ($1, $2, $3)
     `,
-    [userId, tokenHash, expiresAt]
+    [userId, tokenHash, expiresAt],
   );
 
   return sessionToken;
 }
 
+// Validate an existing login session
 export async function validateSession(sessionToken) {
+  if (!sessionToken) return null;
+
   const tokenHash = crypto
     .createHash("sha256")
     .update(sessionToken)
@@ -36,20 +39,20 @@ export async function validateSession(sessionToken) {
 
   const result = await pool.query(
     `
-    SELECT
-      sessions.id,
-      sessions.user_id,
-      sessions.expires_at,
-      users.first_name,
-      users.middle_name,
-      users.last_name,
-      users.email
-    FROM sessions
-    INNER JOIN users
-      ON sessions.user_id = users.id
-    WHERE sessions.token_hash = $1
+      SELECT
+        sessions.id,
+        sessions.user_id,
+        sessions.expires_at,
+        users.first_name,
+        users.middle_name,
+        users.last_name,
+        users.email
+      FROM sessions
+      INNER JOIN users
+        ON sessions.user_id = users.id
+      WHERE sessions.token_hash = $1
     `,
-    [tokenHash]
+    [tokenHash],
   );
 
   if (result.rows.length === 0) {
@@ -58,13 +61,14 @@ export async function validateSession(sessionToken) {
 
   const session = result.rows[0];
 
-  if (new Date(session.expires_at) < new Date()) {
+  // Delete expired sessions
+  if (new Date(session.expires_at) <= new Date()) {
     await pool.query(
       `
-      DELETE FROM sessions
-      WHERE id = $1
+        DELETE FROM sessions
+        WHERE id = $1
       `,
-      [session.id]
+      [session.id],
     );
 
     return null;
@@ -81,17 +85,20 @@ export async function validateSession(sessionToken) {
   };
 }
 
+// Delete a login session
 export async function deleteSession(sessionToken) {
+  if (!sessionToken) return;
+
   const tokenHash = crypto
-    .createHash("SHA256")
+    .createHash("sha256")
     .update(sessionToken)
-    .digest("hex")
+    .digest("hex");
 
   await pool.query(
     `
-    DELETE FROM sessions
-    WHERE token_hash = $1
+      DELETE FROM sessions
+      WHERE token_hash = $1
     `,
-    [tokenHash]
+    [tokenHash],
   );
 }

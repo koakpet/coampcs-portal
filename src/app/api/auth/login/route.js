@@ -30,7 +30,7 @@ export async function POST(request) {
           id,
           first_name,
           middle_name,
-          last_name
+          last_name,
           email,
           password
         FROM users 
@@ -50,7 +50,7 @@ export async function POST(request) {
           password
         FROM users 
         WHERE RIGHT(phone, 10) = $1`,
-        [pphone],
+        [phone],
       );
     }
 

@@ -1,11 +1,12 @@
 import Image from "next/image";
 import {getPortalContext} from "@/lib/auth/getPortalContext";
+import {getProfileByUserId} from "@/lib/queries/profile";
 import {UserCircle, Pencil} from "lucide-react";
 
 export default async function ProfilePage() {
-  const {user, selectedCooperative} = await getPortalContext();
+  const {selectedCooperative} = await getPortalContext();
 
-  console.log(user);
+  const profile = await getProfileByUserId(selectedCooperative.id);
 
   return (
     <>
@@ -26,15 +27,15 @@ export default async function ProfilePage() {
               <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-200">
                 <UserCircle size={15} />
                 <span className="font-semibold">
-                  {selectedCooperative?.membership_no || "Not available"}
+                  {profile.memberships[0]?.membership_no || "Not available"}
                 </span>
               </div>
 
               <h2 className="text-xl font-semibold text-white md:text-2xl">
-                {user.firstName} {user.middleName} {user.lastName}
+                {profile.first_name} {profile.middle_name} {profile.last_name}
               </h2>
 
-              <p className="break-all text-sm text-blue-100">{user.email}</p>
+              <p className="break-all text-sm text-blue-100">{profile.email}</p>
             </div>
           </div>
         </div>
@@ -59,25 +60,62 @@ export default async function ProfilePage() {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 p-3 sm:grid-cols-3">
             <div>
               <p className="text-sm text-slate-500">First Name</p>
               <p className="font-medium text-slate-900">
-                {user.firstName || "Not provided"}
+                {profile.first_name || "Not provided"}
               </p>
             </div>
 
             <div>
               <p className="text-sm text-slate-500">Middle Name</p>
               <p className="font-medium text-slate-900">
-                {user.middleName || "Not provided"}
+                {profile.middle_name || "Not provided"}
               </p>
             </div>
 
             <div>
               <p className="text-sm text-slate-500">Last Name</p>
               <p className="font-medium text-slate-900">
-                {user.lastName || "Not provided"}
+                {profile.last_name || "Not provided"}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-sm text-slate-500">Gender</p>
+              <p className="font-medium text-slate-900">
+                {profile.gender || "Not provided"}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-sm text-slate-500">Phone Number</p>
+              <p className="font-medium text-slate-900">
+                {profile.phone || "Not provided"}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-sm text-slate-500">Email Address</p>
+              <p className="font-medium text-slate-900">
+                {profile.email || "Not provided"}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 p-3 sm:grid-cols-3">
+            <div>
+              <p className="text-sm text-slate-500">Employment Date</p>
+              <p className="font-medium text-slate-900">
+                {profile.employment_date || "Not provided"}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-sm text-slate-500">Current Division</p>
+              <p className="font-medium text-slate-900">
+                {profile.division || "Not provided"}
               </p>
             </div>
           </div>

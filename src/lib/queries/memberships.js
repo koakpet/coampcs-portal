@@ -35,7 +35,7 @@ export async function getMembershipByIdForUser(membershipId, userId) {
     FROM members
     WHERE id = $1
       AND user_id = $2
-      AND status = 'ACTIVE'
+      AND status = 'Active'
     `,
     [membershipId, userId],
   );
