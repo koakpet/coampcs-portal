@@ -1,13 +1,13 @@
 import Image from "next/image";
 import {getPortalContext} from "@/lib/auth/getPortalContext";
 import {getProfileByUserId} from "@/lib/queries/profile";
+import EditProfile from "@/components/popups/EditProfile";
 import {
   UserCircle,
   User,
   Phone,
   Mail,
   BriefcaseBusiness,
-  MapPin,
   Landmark,
   Users,
   CalendarDays,
@@ -63,11 +63,13 @@ export default async function ProfilePage() {
 
   const memberships = profile.memberships || [];
 
+  console.log(profile);
+
   return (
     <div className="flex flex-col gap-6">
       {/* PROFILE HEADER */}
 
-      <div className="bg-green-800 px-5 py-8 md:px-8">
+      <div className="rounded-2xl bg-green-800 px-5 py-8 md:px-8">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
           <div className="h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-white/40 bg-white">
             <Image
@@ -97,8 +99,8 @@ export default async function ProfilePage() {
       </div>
 
       {/* PERSONAL INFORMATION */}
-      <section clsName="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <div className="border-b border-slate-100 px-5 py-5 md:px-7">
+      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="flex items-center justify-between border-b border-slate-100 px-5 py-5 md:px-7">
           <div className="flex items-center gap-3">
             <div className="rounded-xl bg-blue-50 p-2.5 text-[#0B1F4D]">
               <User size={20} />
@@ -113,6 +115,8 @@ export default async function ProfilePage() {
               </p>
             </div>
           </div>
+
+          <EditProfile profile={profile} />
         </div>
 
         <div className="grid grid-cols-2 gap-x-8 gap-y-6 p-5 md:grid-cols-3 md:p-7">
@@ -157,7 +161,7 @@ export default async function ProfilePage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-6 p-5 sm:grid-cols-2 lg:grid-cols-3 md:p-7">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-6 p-5 md:grid-cols-3 md:p-7">
           <ProfileItem
             label="Email Address"
             value={profile.email}
@@ -170,15 +174,7 @@ export default async function ProfilePage() {
             icon={Phone}
           />
 
-          <ProfileItem
-            label="Residential Address"
-            value={profile.address}
-            icon={MapPin}
-          />
-
-          <ProfileItem label="City" value={profile.city} />
-
-          <ProfileItem label="State" value={profile.state_addr} />
+          <ProfileItem label="Division" value={profile.division} />
         </div>
       </section>
 
@@ -199,8 +195,12 @@ export default async function ProfilePage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-6 p-5 sm:grid-cols-2 md:p-7">
-          <ProfileItem label="Bank Name" value={profile.bank} icon={Landmark} />
+        <div className="grid grid-cols-2 gap-x-8 gap-y-6 p-5 md:grid-cols-3 md:p-7">
+          <ProfileItem
+            label="Bank Name"
+            value={profile.bank_payment}
+            icon={Landmark}
+          />
 
           <ProfileItem label="Account Number" value={profile.account_no} />
         </div>
@@ -267,11 +267,12 @@ export default async function ProfilePage() {
                     </div>
                   </div>
 
-                  <div className="mt-5 grid grid-cols-1 gap-5 border-t border-slate-200/70 pt-5 sm:grid-cols-3">
+                  <div className="hidden mt-5 sm:grid grid-cols-1 gap-5 border-t border-slate-200/70 pt-5 sm:grid-cols-3">
                     <ProfileItem
                       label="Membership Number"
                       value={membership.membership_no}
                       icon={UserCircle}
+                      className="hidden md:block"
                     />
 
                     <ProfileItem

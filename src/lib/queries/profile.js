@@ -14,6 +14,7 @@ export async function getProfileByUserId(userId) {
       u.date_of_birth,
       u.employment_date,
       u.retirement_date,
+      u.bank_category,
       u.bank_payment,
       u.account_no,
       u.photo,
