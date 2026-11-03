@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ProfilePhoto from "@/components/layout/ProfilePhoto";
 import {getPortalContext} from "@/lib/auth/getPortalContext";
 import {getProfileByUserId} from "@/lib/queries/profile";
 import EditProfile from "@/components/popups/EditProfile";
@@ -63,23 +63,13 @@ export default async function ProfilePage() {
 
   const memberships = profile.memberships || [];
 
-  console.log(profile);
-
   return (
     <div className="flex flex-col gap-6">
       {/* PROFILE HEADER */}
 
       <div className="rounded-2xl bg-green-800 px-5 py-8 md:px-8">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-          <div className="h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-white/40 bg-white">
-            <Image
-              src={profile.photo || "/user.jpg"}
-              width={120}
-              height={120}
-              alt={`${fullName}'s profile photo`}
-              className="h-full w-full object-cover"
-            />
-          </div>
+          <ProfilePhoto editable={true} size="h-24 w-24" />
 
           <div className="min-w-0">
             <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-200">

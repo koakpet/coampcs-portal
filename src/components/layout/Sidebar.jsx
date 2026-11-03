@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {usePathname, useRouter} from "next/navigation";
-import Image from "next/image";
+import ProfilePhoto from "./ProfilePhoto";
 import {
   LayoutDashboard,
   Landmark,
@@ -112,14 +112,7 @@ export default function Sidebar({user, menu, admin}) {
             </button>
 
             <div className="md:hidden flex gap-1.5">
-              <div className="overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]">
-                <Image
-                  src="/user.jpg"
-                  width={90}
-                  height={90}
-                  alt="user_image"
-                />
-              </div>
+              <ProfilePhoto editable={false} size="h-9 w-9" />
 
               <div className="flex flex-col ">
                 <p className="text-sm font-semibold text-slate-900">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Logo from "./Logo";
-import Image from "next/image";
+import ProfilePhoto from "./ProfilePhoto";
 import {Bell, Menu, Search} from "lucide-react";
 import Sidebar from "./Sidebar";
 import {useState} from "react";
@@ -46,14 +46,9 @@ export default function Navbar({user, memberships, menu}) {
               className="relative flex items-center gap-1.5 cursor-pointer"
             >
               {/* User Image */}
-              <div className="overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]">
-                <Image
-                  src="/user.jpg"
-                  width={120}
-                  height={120}
-                  alt="user_image"
-                />
-              </div>
+              {/* <div className="overflow-hidden h-9 w-9 rounded-full border border-[#0B1F4D]"> */}
+              <ProfilePhoto editable={false} size="h-10 w-10" />
+              {/* </div> */}
 
               <span className="md:hidden absolute right-0 top-0 h-2 w-2 rounded-full bg-red-500" />
 
