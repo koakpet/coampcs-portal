@@ -66,10 +66,10 @@ export default function Sidebar({user, menu, admin}) {
 
               return (
                 <Link
+                  onClick={() => setClose(false)}
                   key={item.name}
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  onClick={() => setClose(false)}
                   className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
                 >
                   <Icon size={20} />
@@ -80,6 +80,7 @@ export default function Sidebar({user, menu, admin}) {
 
             {admin.role !== "Member" && (
               <Link
+                onClick={() => setClose(false)}
                 href="/admin-dashboard"
                 className={`${baseClasses} ${
                   pathname.startsWith("/admin-dashboard")
