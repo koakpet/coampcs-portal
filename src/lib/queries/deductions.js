@@ -66,3 +66,23 @@ export async function getDeductionTotals(memberId) {
 
   return result.rows[0];
 }
+
+export default async function getTotalDeductions(cooperativeCode) {
+  const result = await pool.query(
+    `SELECT
+        COALESCE(SUM(d.amount), 0) AS allocation,
+        TO_CHAR(
+          DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month',
+          'FMMonth'
+        ) AS allocation_month
+     FROM deductions d
+     WHERE
+        d.cooperative_code = $1
+        AND d.deduction_date >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month'
+        AND d.deduction_date < DATE_TRUNC('month', CURRENT_DATE)
+    `,
+    [cooperativeCode],
+  );
+
+  return result.rows[0];
+}

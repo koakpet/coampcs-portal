@@ -18,7 +18,7 @@ export default async function PortalLayout({children}) {
         menu={memberships}
       />
       <div className="pt-27 px-3 md:px-12 md:flex gap-3">
-        <div className="md:grow">{children}</div>
+        <div className="md:grow min-w-0">{children}</div>
         <div className="w-80">
           <QuickActions />
         </div>

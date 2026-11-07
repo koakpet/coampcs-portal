@@ -11,7 +11,8 @@ import {
   User,
   Settings,
   LogOut,
-  Repeat2,
+  Repeat,
+  ChartBarStacked,
 } from "lucide-react";
 import SelectCooperative from "../popups/SelectCooperative";
 import {useState} from "react";
@@ -88,7 +89,7 @@ export default function Sidebar({user, menu, admin}) {
                     : inactiveClasses
                 }`}
               >
-                <Repeat2 size={20} /> Admin Dashboard
+                <ChartBarStacked size={20} /> Admin Dashboard
               </Link>
             )}
 
@@ -98,7 +99,7 @@ export default function Sidebar({user, menu, admin}) {
                 type="button"
                 onClick={() => setShowCooperatives(true)}
               >
-                <Repeat2 size={20} /> Switch Cooperative
+                <Repeat size={20} /> Switch Cooperative
               </button>
             )}
           </nav>
