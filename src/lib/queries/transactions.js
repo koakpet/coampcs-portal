@@ -93,3 +93,31 @@ export async function getTransactionsMade(memberId) {
 
   return result.rows[0];
 }
+
+export default async function getTotalDisbursementMade(cooperativeCode) {
+  const result = await pool.query(
+    `SELECT
+        COALESCE(SUM(COALESCE(t.debit, 0)), 0) AS loan_disbursed,
+
+        TO_CHAR(
+          MAX(DATE_TRUNC('month', t.payment_date)),
+          'FMMonth'
+        ) AS month
+
+     FROM transactions t
+
+     WHERE t.cooperative_code = $1
+       AND t.payment_type = 'Loan'
+
+       AND DATE_TRUNC('month', t.payment_date) = (
+          SELECT MAX(DATE_TRUNC('month', t2.payment_date))
+          FROM transactions t2
+          WHERE t2.cooperative_code = $1
+            AND t2.payment_type = 'Loan'
+       )
+    `,
+    [cooperativeCode],
+  );
+
+  return result.rows[0];
+}

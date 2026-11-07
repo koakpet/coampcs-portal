@@ -1,22 +1,24 @@
 import {Users, PiggyBank, Wallet, FileText, HandCoins} from "lucide-react";
 
-const currencyFormatter = new Intl.NumberFormat("en-NG", {
-  style: "currency",
-  currency: "NGN",
-  maximumFractionDigits: 0,
-});
-
-export default function CooperativeStats({allocation, allocationMonth}) {
-  const currency = new Intl.NumberFormat("en-NG", {
+// Format amounts as Nigerian Naira
+function formatNaira(amount) {
+  return new Intl.NumberFormat("en-NG", {
     style: "currency",
     currency: "NGN",
-    maximumFractionDigits: 0,
-  });
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(Number(amount ?? 0));
+}
 
+export default function CooperativeStats({
+  allocation,
+  allocationMonth,
+  loanDisbursed,
+}) {
   const stats = [
     {
       label: `${allocationMonth} Allocation`,
-      value: currency(allocation),
+      value: formatNaira(allocation),
       change: "+2.4% this month",
       icon: PiggyBank,
       bgColor: "bg-emerald-50",
@@ -24,8 +26,8 @@ export default function CooperativeStats({allocation, allocationMonth}) {
       border: "border-emerald-100",
     },
     {
-      label: "Month Disbursement",
-      value: "₦4,620,000",
+      label: `${allocationMonth} Disbursement`,
+      value: formatNaira(4620000),
       change: "+6 this month",
       icon: Wallet,
       bgColor: "bg-indigo-50",
@@ -34,7 +36,7 @@ export default function CooperativeStats({allocation, allocationMonth}) {
     },
     {
       label: "Loans Request",
-      value: "₦3,300,000",
+      value: formatNaira(3300000),
       change: "58 members",
       icon: FileText,
       bgColor: "bg-blue-50",
@@ -43,7 +45,7 @@ export default function CooperativeStats({allocation, allocationMonth}) {
     },
     {
       label: "Loan Disbursed",
-      value: "₦1,300,000",
+      value: formatNaira(loanDisbursed),
       change: "Requires action",
       icon: HandCoins,
       bgColor: "bg-amber-50",
